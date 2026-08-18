@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>庞博 · 运营经理 · 在线简历</title>
+<style>
+  :root{
+    /* 主色 */
+    --navy-900:#0a1f3c;
+    --navy-800:#0d2b52;
+    --navy-700:#123a6d;
+    --navy-600:#1a4d8f;
+    --blue:#2f6fed;
+    --blue-2:#4a8afc;
+    --violet:#7c5cff;
+    --cyan:#22d3ee;
+    /* 文本 */
+    --ink:#16263b;
+    --gray:#5a6b7d;
+    --line:#e3eaf4;
+    /* 玻璃态 */
+    --glass:rgba(255,255,255,.72);
+    --glass-strong:rgba(255,255,255,.86);
+    --glass-border:rgba(255,255,255,.65);
+    --glass-border-2:rgba(47,111,237,.18);
+    /* 背景与圆角 */
+    --bg:#eef2fb;
+    --white:#ffffff;
+    --radius:18px;
+    --radius-sm:12px;
+    /* 阴影 */
+    --shadow:0 6px 22px rgba(13,43,82,.08);
+    --shadow-lg:0 18px 50px rgba(13,43,82,.16);
+    --glow:0 0 0 1px rgba(47,111,237,.12),0 8px 28px rgba(47,111,237,.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    position:relative;
+    overflow-x:hidden;
+  }
+  /* 颗粒纹理背景（双层：底色 + noise） */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      radial-gradient(1200px 600px at 10% -10%,rgba(124,92,255,.10),transparent 60%),
+      radial-gradient(900px 500px at 95% 10%,rgba(47,111,237,.12),transparent 60%),
+      radial-gradient(800px 600px at 50% 100%,rgba(34,211,238,.08),transparent 60%);
+  }
+  body::after{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.05  0 0 0 0 0.10  0 0 0 0 0.20  0 0 0 0.10 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    background-size:240px 240px;mix-blend-mode:multiply;
+  }
+  .container{max-width:1120px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+  /* ===== Hero ===== */
+  .hero{
+    background:
+      linear-gradient(135deg,#061428 0%,#0a2147 40%,#102e63 70%,#1a4d8f 100%);
+    color:#fff;
+    padding:50px 0 42px;
+    position:relative;
+    overflow:hidden;
+    isolation:isolate;
+  }
+  /* 网格点阵 + 多光斑 */
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:0;
+    background-image:radial-gradient(rgba(255,255,255,.10) 1px,transparent 1px);
+    background-size:24px 24px;
+    mask-image:linear-gradient(to bottom,rgba(0,0,0,.85) 0%,rgba(0,0,0,.3) 70%,transparent 100%);
+    -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.85) 0%,rgba(0,0,0,.3) 70%,transparent 100%);
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(380px 380px at 88% 18%,rgba(124,92,255,.45),transparent 65%),
+      radial-gradient(420px 320px at 5% 90%,rgba(34,211,238,.30),transparent 65%),
+      radial-gradient(300px 300px at 50% 50%,rgba(47,111,237,.25),transparent 70%);
+  }
+  .hero .container{position:relative;z-index:2}
+  .hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap}
+  .hero-name{
+    font-size:clamp(34px,5vw,48px);font-weight:800;letter-spacing:3px;
+    background:linear-gradient(120deg,#fff 30%,#9fc1f5 60%,#7c5cff 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero-role{
+    margin-top:10px;font-size:clamp(17px,2.4vw,21px);font-weight:600;color:#9fc1f5;
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  }
+  .hero-role .bar{display:inline-block;width:34px;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--blue),var(--violet))}
+  .hero-tag{font-size:12px;color:#cfe0f8;margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+  .hero-tag span{
+    border:1px solid rgba(255,255,255,.22);padding:3px 12px;border-radius:999px;
+    background:rgba(255,255,255,.06);backdrop-filter:blur(8px);
+  }
+  .hero-meta{display:flex;flex-direction:column;gap:8px;font-size:14px;color:#d6e4fa}
+  .hero-meta div{display:flex;align-items:center;gap:8px}
+  .hero-meta .ico{
+    width:30px;height:30px;border-radius:9px;
+    background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.04));
+    border:1px solid rgba(255,255,255,.18);
+    display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:none;
+  }
+  .hero-meta a{color:#d6e4fa;text-decoration:none}
+  .hero-meta a:hover{color:#fff}
+  .hero-stats{
+    margin-top:28px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+  }
+  .hs-item{
+    background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.03));
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:14px;padding:14px 12px;text-align:center;
+    backdrop-filter:blur(12px) saturate(140%);
+    -webkit-backdrop-filter:blur(12px) saturate(140%);
+    position:relative;overflow:hidden;
+  }
+  .hs-item::before{
+    content:"";position:absolute;top:0;left:10%;right:10%;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);
+  }
+  .hs-num{
+    font-size:clamp(22px,3vw,30px);font-weight:800;color:#fff;
+    background:linear-gradient(120deg,#fff,#9fc1f5);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hs-num em{font-style:normal;font-size:.55em;color:#22d3ee;font-weight:600;-webkit-text-fill-color:#22d3ee}
+  .hs-label{font-size:12px;color:#bcd0ef;margin-top:4px;letter-spacing:.5px}
+
+  /* ===== Sections ===== */
+  section{padding:34px 0 4px}
+  .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .sec-head .idx{
+    width:36px;height:36px;border-radius:10px;
+    background:linear-gradient(135deg,var(--navy-800),var(--blue));
+    color:#fff;
+    display:inline-flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:14px;flex:none;
+    box-shadow:0 6px 16px rgba(47,111,237,.32);
+  }
+  .sec-head h2{
+    font-size:clamp(20px,3vw,25px);color:var(--navy-900);font-weight:800;letter-spacing:.5px;
+    background:linear-gradient(120deg,var(--navy-900) 60%,var(--blue) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .sec-head .line{flex:1;height:1px;background:linear-gradient(to right,var(--line),transparent)}
+
+  /* 玻璃态卡片基类 */
+  .card{
+    background:var(--glass);
+    border:1px solid var(--glass-border-2);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(14px) saturate(140%);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);
+    padding:20px;
+    position:relative;overflow:hidden;
+  }
+  .card::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent);
+  }
+
+  /* ===== About ===== */
+  .about-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .about-item h4{
+    font-size:15px;color:var(--navy-800);margin-bottom:6px;display:flex;align-items:center;gap:8px;
+  }
+  .about-item h4::before{content:"";width:8px;height:8px;border-radius:50%;
+    background:linear-gradient(135deg,var(--blue),var(--violet));flex:none;
+    box-shadow:0 0 8px rgba(47,111,237,.5);
+  }
+  .about-item p{font-size:13.5px;color:var(--gray);line-height:1.7}
+
+  /* ===== Timeline ===== */
+  .timeline{position:relative;padding-left:32px}
+  .timeline::before{
+    content:"";position:absolute;left:10px;top:6px;bottom:6px;width:2px;border-radius:2px;
+    background:linear-gradient(to bottom,var(--blue) 0%,var(--violet) 60%,var(--line) 100%);
+  }
+  .tl-item{position:relative;margin-bottom:18px}
+  .tl-item::before{
+    content:"";position:absolute;left:-30px;top:24px;width:14px;height:14px;border-radius:50%;
+    background:var(--white);border:3px solid var(--blue);
+    box-shadow:0 0 0 4px rgba(47,111,237,.15);
+  }
+  .tl-item.current::before{
+    background:linear-gradient(135deg,var(--blue),var(--violet));
+    box-shadow:0 0 0 4px rgba(124,92,255,.20);
+  }
+  .tl-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+  .tl-company{font-size:16.5px;font-weight:700;color:var(--navy-900)}
+  .tl-role{font-size:13px;color:var(--blue);font-weight:600;margin-bottom:3px}
+  .tl-date{
+    font-size:12px;font-weight:700;color:#fff;
+    background:linear-gradient(135deg,var(--navy-700),var(--blue));
+    padding:3px 12px;border-radius:999px;white-space:nowrap;
+    box-shadow:0 4px 12px rgba(47,111,237,.25);
+  }
+  .tl-card p{font-size:13.5px;color:var(--gray);line-height:1.7}
+  .tl-card ul{margin-top:8px;list-style:none}
+  .tl-card li{
+    font-size:13px;color:var(--ink);padding-left:18px;position:relative;margin-bottom:4px;line-height:1.65;
+  }
+  .tl-card li::before{
+    content:"▸";position:absolute;left:0;top:0;color:var(--blue);font-weight:700;
+  }
+  .tl-card li b{color:var(--navy-800)}
+  .result-chip{
+    display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-size:12px;color:var(--navy-700);
+    background:linear-gradient(135deg,var(--blue-light),#f0e9ff);
+    border:1px solid #d6e5fb;padding:3px 12px;border-radius:999px;
+  }
+  .result-chip::before{content:"★";color:#f0a500}
+
+  /* ===== Skills ===== */
+  .skills-wrap{display:grid;grid-template-columns:300px 1fr;gap:18px;align-items:stretch}
+  .radar-box{
+    background:var(--glass-strong);
+    border:1px solid var(--glass-border-2);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(14px) saturate(140%);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);
+    padding:10px;position:relative;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .radar-box::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent);
+  }
+  .radar-box svg{width:100%;height:auto;max-height:280px;display:block}
+  .skill-list{display:flex;flex-direction:column;gap:9px}
+  .skill-item h5{font-size:14px;color:var(--navy-800);display:flex;justify-content:space-between;margin-bottom:5px}
+  .skill-item h5 span{
+    font-weight:800;font-size:13px;
+    background:linear-gradient(120deg,var(--blue),var(--violet));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .skill-bar{height:7px;background:linear-gradient(90deg,#e8eef8,#eef0fb);border-radius:99px;overflow:hidden;box-shadow:inset 0 1px 2px rgba(13,43,82,.06)}
+  .skill-bar i{
+    display:block;height:100%;border-radius:99px;
+    background:linear-gradient(90deg,var(--navy-600) 0%,var(--blue) 50%,var(--violet) 100%);
+    width:0;transition:width 1.2s cubic-bezier(.2,.8,.2,1);
+    box-shadow:0 0 10px rgba(47,111,237,.35);
+  }
+  .skill-desc{font-size:12.5px;color:var(--gray);margin-top:5px;line-height:1.6}
+
+  /* ===== Stats cards ===== */
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .stat-card{
+    background:var(--glass-strong);
+    border:1px solid var(--glass-border-2);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(14px) saturate(140%);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);
+    padding:18px 16px;text-align:center;position:relative;overflow:hidden;
+    transition:transform .25s ease,box-shadow .25s ease;
+  }
+  .stat-card::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,var(--navy-700) 0%,var(--blue) 50%,var(--violet) 100%);
+  }
+  .stat-card::after{
+    content:"";position:absolute;top:0;left:10%;right:10%;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent);
+  }
+  .stat-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+  .stat-num{
+    font-size:clamp(24px,3.4vw,30px);font-weight:800;letter-spacing:.5px;
+    background:linear-gradient(135deg,var(--navy-900) 0%,var(--blue) 60%,var(--violet) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .stat-num em{font-style:normal;font-size:.6em;color:var(--cyan);font-weight:700;-webkit-text-fill-color:var(--cyan)}
+  .stat-label{font-size:13px;font-weight:700;color:var(--navy-800);margin-top:5px}
+  .stat-sub{font-size:11.5px;color:var(--gray);margin-top:3px}
+
+  /* ===== Education ===== */
+  .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .edu-card{display:flex;gap:14px;align-items:flex-start}
+  .edu-badge{
+    width:46px;height:46px;border-radius:12px;flex:none;
+    background:linear-gradient(135deg,var(--navy-700),var(--blue) 60%,var(--violet));
+    color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;
+    box-shadow:0 8px 20px rgba(47,111,237,.32);
+  }
+  .edu-card h4{font-size:15.5px;color:var(--navy-900)}
+  .edu-meta{font-size:12.5px;color:var(--blue);font-weight:600;margin:2px 0 4px}
+  .edu-time{font-size:12px;color:var(--gray)}
+
+  footer{
+    margin-top:38px;
+    background:
+      linear-gradient(135deg,#061428 0%,#0a2147 60%,#102e63 100%);
+    color:#9fb4d4;text-align:center;padding:22px 16px;font-size:13px;
+    position:relative;overflow:hidden;
+  }
+  footer::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(500px 200px at 50% 0%,rgba(124,92,255,.25),transparent 60%);
+  }
+  footer .container{position:relative;z-index:1}
+  footer b{color:#fff;background:linear-gradient(120deg,#fff,#9fc1f5);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* ===== Reveal animation ===== */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
+  .reveal.visible{opacity:1;transform:none}
+
+  /* ===== Responsive ===== */
+  @media (max-width:900px){
+    .hero-stats{grid-template-columns:repeat(2,1fr)}
+    .about-grid{grid-template-columns:1fr}
+    .skills-wrap{grid-template-columns:1fr}
+    .stats-grid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:560px){
+    .hero{padding:36px 0 32px}
+    .stats-grid{grid-template-columns:1fr 1fr}
+    .edu-grid{grid-template-columns:1fr}
+    .timeline{padding-left:26px}
+  }
+  @media print{
+    /* 关闭 body 颗粒/光斑装饰，纯背景色，避免干扰打印 */
+    body::before,body::after{display:none!important}
+    .hero{
+      background:#0a2147!important;
+      -webkit-print-color-adjust:exact;print-color-adjust:exact;
+      padding:30px 0 26px;break-after:avoid;
+    }
+    .hero::after{display:none!important}
+    .hero-name,.hs-num,.sec-head h2,footer b{
+      -webkit-text-fill-color:#fff!important;color:#fff!important;
+      background:none!important;
+    }
+    .stat-num{
+      -webkit-text-fill-color:var(--navy-900)!important;color:var(--navy-900)!important;
+      background:none!important;
+    }
+    .hs-num em,.stat-num em{
+      -webkit-text-fill-color:var(--cyan)!important;color:var(--cyan)!important;background:none!important;
+    }
+    .card,.stat-card,.radar-box,.edu-card{
+      background:#ffffff!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+      box-shadow:none!important;break-inside:avoid;
+    }
+    .skill-item,.tl-item,.about-item{break-inside:avoid}
+    .radar-box{break-inside:auto}
+    .reveal{opacity:1;transform:none}
+    section{padding-top:24px}
+    .sec-head{break-after:auto;break-inside:avoid;margin-bottom:14px}
+    .stats-grid{break-inside:auto}
+    .hero-stats{margin-top:18px}
+    .hs-item{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.22);backdrop-filter:none}
+    footer{break-before:avoid;padding:16px}
+    footer::before{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-top">
+      <div>
+        <div class="hero-name">庞 博</div>
+        <div class="hero-role"><span class="bar"></span>运营经理 · 互联网运营专家</div>
+        <div class="hero-tag">
+          <span>10+ 年互联网运营经验</span>
+          <span>百万级 APP 运营</span>
+          <span>联合创业经历</span>
+          <span>随时到岗</span>
+        </div>
+      </div>
+      <div class="hero-meta">
+        <div><span class="ico">📞</span><a href="tel:13488980742">134 8898 0742</a></div>
+        <div><span class="ico">✉️</span><a href="mailto:406504344@qq.com">406504344@qq.com</a></div>
+        <div><span class="ico">📍</span>成都 · 男 · 33 岁</div>
+        <div><span class="ico">💼</span>期望 10k–18k · 互联网行业</div>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hs-item"><div class="hs-num">12<em>年+</em></div><div class="hs-label">运营实战经验</div></div>
+      <div class="hs-item"><div class="hs-num">2600<em>万</em></div><div class="hs-label">平台用户量级</div></div>
+      <div class="hs-item"><div class="hs-num">3000<em>万+</em></div><div class="hs-label">最新项目 GMV</div></div>
+      <div class="hs-item"><div class="hs-num">70<em>人</em></div><div class="hs-label">最大管理半径</div></div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- ================= 个人简介 ================= -->
+  <section id="about">
+    <div class="sec-head"><span class="idx">01</span><h2>个人简介</h2><span class="line"></span></div>
+    <div class="about-grid">
+      <div class="card about-item reveal">
+        <h4>工作经验</h4>
+        <p>10 年以上互联网运营经验，曾在多家平台型企业担任核心运营岗位，主导多个 APP / 小程序项目全流程运营，具备联合创业经验。</p>
+      </div>
+      <div class="card about-item reveal">
+        <h4>专业能力</h4>
+        <p>精通用户增长、活动策划与数据分析，擅长产品生命周期管理，成功提升多个项目用户活跃度，拥有百万级 APP 运营经验。</p>
+      </div>
+      <div class="card about-item reveal">
+        <h4>职业态度</h4>
+        <p>目标导向型管理者，具备极强的执行力与抗压能力，擅长跨部门协作与团队激励，注重结果交付与团队成长。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 工作经历时间线 ================= -->
+  <section id="experience">
+    <div class="sec-head"><span class="idx">02</span><h2>工作经历</h2><span class="line"></span></div>
+    <div class="timeline">
+
+      <div class="tl-item current reveal">
+        <div class="tl-head"><span class="tl-company">成都所见系传媒集团有限公司</span><span class="tl-date">2025.11 – 2026.8</span></div>
+        <div class="tl-role">数字文旅运营经理 ｜ 行业：文旅</div>
+        <div class="card tl-card">
+          <p><b>核心项目：</b>主导理县【政府中标项目】「藏羌理物」农文旅线上平台 0→1 搭建与整体运营，围绕「内容 + 电商 + 直播 + 私域」搭建全链路运营体系，整合藏羌民族文化 IP、农特产品与景区文旅资源。</p>
+          <ul>
+            <li><b>用户增长：</b>新媒体矩阵、内容种草、达人合作与私域社群多渠道引流，搭建用户分层运营体系，持续提升活跃度与复购率</li>
+            <li><b>数据运营：</b>搭建平台经营数据监控体系，通过数据分析优化活动玩法与转化链路，驱动运营策略迭代</li>
+          </ul>
+          <span class="result-chip">平台 GMV 突破 3000 万元，上线即承接政府消费券 210.8 万元</span>
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-head"><span class="tl-company">四川富为科技有限公司</span><span class="tl-date">2025.2 – 2025.8</span></div>
+        <div class="tl-role">运营经理 ｜ 行业：AI + 汽车</div>
+        <div class="card tl-card">
+          <p><b>产品：</b>「中油优途」+「AI 车管家」+「AI 加油」APP，负责 AI 车管家 App 全链路运营（内容运营、电商活动、用户增长），管理 CMS 后台、消息推送与埋点数据分析。</p>
+          <ul>
+            <li>参与 AI 产品 0→1 完整过程：从顶层设计到商业模式落地</li>
+            <li>社区与内容运营 + 用户与增长运营 + 项目执行与协同 + 数据与复盘</li>
+          </ul>
+          <span class="result-chip">中油优途 2600 万用户 · AI 车管家 / AI 加油完成 0→1 上万用户与收费模式落地</span>
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-head"><span class="tl-company">四川虎月风尚文化传媒有限公司</span><span class="tl-date">2023.4 – 2024.12</span></div>
+        <div class="tl-role">联合创始人 ｜ 新媒体 · 文化传媒（创业）</div>
+        <div class="card tl-card">
+          <p>以品牌服务 + 新媒体代运营 + 直播带货为经营核心的文化传播公司，负责运营战略规划、公司管理、项目管理与渠道开拓。</p>
+          <ul>
+            <li>代表案例：<b>《魔兽嘉年华·成都站》《平乐古镇》《侏罗纪高校赛》《找事 APP》</b> 等品牌与运营项目</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-head"><span class="tl-company">四川福瑞至科技有限公司</span><span class="tl-date">2020.5 – 2023.3</span></div>
+        <div class="tl-role">运营总监 ｜ 行业：大健康（S2B2C 自有电商平台）</div>
+        <div class="card tl-card">
+          <p>从零组建并筹建运营部，负责人员、产品线、运营平台的策划与维护；主导「脑悦康」小程序商城运营，打通线上线下消费转化。</p>
+          <ul>
+            <li>设计营销玩法 / 互动方式促成小程序成交；个人号 + 朋友圈 + 群组 + 服务号 + 订阅号沉淀粉丝实现重复转化</li>
+            <li>整合供应链优势供给，承接用户需求，推动产品化解决方案与产技落地</li>
+          </ul>
+          <span class="result-chip">平台年 GMV 突破 1200 万元 · 引入 50+ 优质供应商 · SKU 增长 300%</span>
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-head"><span class="tl-company">四川工小为科技有限公司</span><span class="tl-date">2018.5 – 2020.1</span></div>
+        <div class="tl-role">运营经理 ｜ 工程互联网产业威客平台（B2C / B2B）</div>
+        <div class="card tl-card">
+          <p>「工小为」平台核心运营负责人，全面负责平台 0→1 运营体系建设与团队管理，从产品运营出发，后续发力用户拉新促活。</p>
+          <ul>
+            <li>制定年度 / 季度运营策略，流程优化实现运营目标完成率 <b>120%</b></li>
+            <li>主导搭建 <b>10–20 人</b>运营团队，完善组织架构与管理制度；落地线下营销活动、发布会与业务技能培训多场</li>
+            <li>构建用户增长模型，优化拉新促活策略；解决建筑行业"找人难、收款难、利润低"三大痛点</li>
+          </ul>
+          <span class="result-chip">上线半年 B 端商家 1000+ 家 · 专家资源 3000+ 名 · 年营业额约 2000 万元</span>
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-head"><span class="tl-company">四川银族文化传媒</span><span class="tl-date">2012.9 – 2018.4</span></div>
+        <div class="tl-role">运营 ｜ 网红直播 · 传媒 · 带货</div>
+        <div class="card tl-card">
+          <ul>
+            <li><b>新媒体运营：</b>负责微博、微信公众号等平台的内容策划与运营</li>
+            <li><b>全案营销策划：</b>主导策划并执行线上营销活动，活动期销售额增长 <b>50%</b></li>
+            <li><b>直播体系构建：</b>搭建并优化直播流程，提升观众留存率与转化率</li>
+            <li><b>品牌战略规划 / 数据驱动运营：</b>参与品牌年度战略制定，以数据优化运营策略</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= 技能 ================= -->
+  <section id="skills">
+    <div class="sec-head"><span class="idx">03</span><h2>技能专长</h2><span class="line"></span></div>
+    <div class="skills-wrap">
+      <div class="radar-box reveal">
+        <svg id="radar" viewBox="0 0 320 300" role="img" aria-label="技能雷达图"></svg>
+      </div>
+      <div class="skill-list">
+        <div class="card skill-item reveal">
+          <h5>数据分析 <span>90</span></h5>
+          <div class="skill-bar"><i data-w="90"></i></div>
+          <div class="skill-desc">熟练使用 Excel、SQL 进行数据清洗与分析，通过数据洞察优化运营策略</div>
+        </div>
+        <div class="card skill-item reveal">
+          <h5>用户增长 <span>95</span></h5>
+          <div class="skill-bar"><i data-w="95"></i></div>
+          <div class="skill-desc">用户生命周期管理，熟悉 AARRR 模型，擅长站内外自然流及信息流投放（SEO + ASO）</div>
+        </div>
+        <div class="card skill-item reveal">
+          <h5>活动策划 <span>90</span></h5>
+          <div class="skill-bar"><i data-w="90"></i></div>
+          <div class="skill-desc">独立策划并执行线上营销活动，平均参与度达万人次</div>
+        </div>
+        <div class="card skill-item reveal">
+          <h5>AI 办公 <span>80</span></h5>
+          <div class="skill-bar"><i data-w="80"></i></div>
+          <div class="skill-desc">熟练使用各类 AI 技能（写作、数据、视觉生成与流程自动化），精通提示词工程，灵活调度大模型完成复杂任务</div>
+        </div>
+        <div class="card skill-item reveal">
+          <h5>管理能力 <span>90</span></h5>
+          <div class="skill-bar"><i data-w="90"></i></div>
+          <div class="skill-desc">多个项目管理经验，管理半径 10–70 人；跨部门协作，成功推动 3 个百万级流量项目落地</div>
+        </div>
+        <div class="card skill-item reveal">
+          <h5>新媒体运营 <span>90</span></h5>
+          <div class="skill-bar"><i data-w="90"></i></div>
+          <div class="skill-desc">独立策划、撰写、剪辑并运营账号，拥有百万粉丝账号运营经验</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 项目亮点数据卡片 ================= -->
+  <section id="highlights">
+    <div class="sec-head"><span class="idx">04</span><h2>项目亮点</h2><span class="line"></span></div>
+    <div class="stats-grid">
+      <div class="stat-card reveal">
+        <div class="stat-num">3000<em>万+</em></div>
+        <div class="stat-label">藏羌理物 GMV</div>
+        <div class="stat-sub">藏羌理物 · 农文旅平台</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-num">2600<em>万</em></div>
+        <div class="stat-label">平台用户量级</div>
+        <div class="stat-sub">中油优途 APP</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-num">1200<em>万</em></div>
+        <div class="stat-label">平台年 GMV</div>
+        <div class="stat-sub">脑悦康 · 大健康电商</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-num">2000<em>万</em></div>
+        <div class="stat-label">团队年营业额</div>
+        <div class="stat-sub">工小为 · 威客平台</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-num">1000<em>+</em></div>
+        <div class="stat-label">B 端合作商家</div>
+        <div class="stat-sub">工小为 · 半年上线</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-num">210.8<em>万</em></div>
+        <div class="stat-label">政府消费券运营</div>
+        <div class="stat-sub">覆盖 18+ 商户 · 领券-核销-对账全流程</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-num">120<em>%</em></div>
+        <div class="stat-label">运营目标完成率</div>
+        <div class="stat-sub">工小为 · 流程优化</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-num">+300<em>%</em></div>
+        <div class="stat-label">SKU 规模增长</div>
+        <div class="stat-sub">脑悦康 · 50+ 供应商引入</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 教育背景 ================= -->
+  <section id="education">
+    <div class="sec-head"><span class="idx">05</span><h2>教育背景</h2><span class="line"></span></div>
+    <div class="edu-grid">
+      <div class="card edu-card reveal">
+        <div class="edu-badge">🎓</div>
+        <div>
+          <h4>四川大学</h4>
+          <div class="edu-meta">工商管理 ｜ 本科</div>
+          <div class="edu-time">2018.9 – 2020.6</div>
+        </div>
+      </div>
+      <div class="card edu-card reveal">
+        <div class="edu-badge">🏗️</div>
+        <div>
+          <h4>四川职业技术学院</h4>
+          <div class="edu-meta">土木工程 ｜ 专科</div>
+          <div class="edu-time">2010.9 – 2012.9</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <b>庞博</b> · 运营经理 · 期望薪资 10k–18k · 随时到岗<br>
+  电话 134 8898 0742 ｜ 邮箱 406504344@qq.com
+</footer>
+
+<script>
+  /* ===== 技能雷达图（纯 SVG 生成，无外部依赖） ===== */
+  (function(){
+    var skills = [
+      {name:"数据分析", value:4.5},
+      {name:"用户增长", value:5},
+      {name:"活动策划", value:4.5},
+      {name:"AI 办公",  value:4},
+      {name:"管理能力", value:4.5},
+      {name:"新媒体运营", value:4.5}
+    ];
+    var svg = document.getElementById("radar");
+    var NS = "http://www.w3.org/2000/svg";
+    var cx = 160, cy = 150, R = 95, levels = 5;
+    var N = skills.length;
+
+    function pt(i, r){
+      var ang = -Math.PI/2 + i * (2*Math.PI/N);
+      return [cx + r*Math.cos(ang), cy + r*Math.sin(ang)].map(function(v){return v.toFixed(1)});
+    }
+    function poly(r){
+      var pts = [];
+      for(var i=0;i<N;i++) pts.push(pt(i,r).join(","));
+      return pts.join(" ");
+    }
+    // 网格
+    for(var l=1;l<=levels;l++){
+      var g = document.createElementNS(NS,"polygon");
+      g.setAttribute("points", poly(R*l/levels));
+      g.setAttribute("fill","none");
+      g.setAttribute("stroke", l===levels ? "#c7d8f2" : "#e4ecf8");
+      g.setAttribute("stroke-width", l===levels ? 1.4 : 1);
+      svg.appendChild(g);
+    }
+    // 轴线
+    for(var i=0;i<N;i++){
+      var line = document.createElementNS(NS,"line");
+      var p = pt(i,R);
+      line.setAttribute("x1",cx); line.setAttribute("y1",cy);
+      line.setAttribute("x2",p[0]); line.setAttribute("y2",p[1]);
+      line.setAttribute("stroke","#e4ecf8"); line.setAttribute("stroke-width",1);
+      svg.appendChild(line);
+    }
+    // 数据多边形
+    var data = document.createElementNS(NS,"polygon");
+    data.setAttribute("points", poly(0));
+    data.setAttribute("fill","rgba(47,111,237,.28)");
+    data.setAttribute("stroke","#1a4d8f");
+    data.setAttribute("stroke-width",2.5);
+    data.setAttribute("stroke-linejoin","round");
+    svg.appendChild(data);
+    // 数据顶点
+    var dots = [];
+    for(var i=0;i<N;i++){
+      var c = document.createElementNS(NS,"circle");
+      c.setAttribute("r",4);
+      c.setAttribute("fill","#fff");
+      c.setAttribute("stroke","#1a4d8f");
+      c.setAttribute("stroke-width",2.5);
+      dots.push(c); svg.appendChild(c);
+    }
+    // 标签
+    for(var i=0;i<N;i++){
+      var p = pt(i,R+22);
+      var t = document.createElementNS(NS,"text");
+      t.setAttribute("x",p[0]); t.setAttribute("y",p[1]);
+      t.setAttribute("text-anchor","middle");
+      t.setAttribute("dominant-baseline","middle");
+      t.setAttribute("font-size","12.5");
+      t.setAttribute("fill","#123a6d");
+      t.setAttribute("font-weight","600");
+      t.textContent = skills[i].name;
+      svg.appendChild(t);
+    }
+    // 动画
+    var target = poly(0).split(" ").map(function(s){
+      return s.split(",").map(Number);
+    });
+    var finalPts = skills.map(function(s, idx){ return pt(idx, R*s.value/5); }).map(function(p){return p.map(Number)});
+    function setPoints(points){
+      data.setAttribute("points", points.map(function(p){return p.join(",")}).join(" "));
+      for(var k=0;k<dots.length;k++){
+        dots[k].setAttribute("cx", points[k][0]);
+        dots[k].setAttribute("cy", points[k][1]);
+      }
+    }
+    var start = null, dur = 1100;
+    function step(ts){
+      if(!start) start = ts;
+      var p = Math.min((ts-start)/dur, 1);
+      var ease = 1 - Math.pow(1-p, 3);
+      var cur = finalPts.map(function(fp, k){
+        return [target[k][0] + (fp[0]-target[k][0])*ease,
+                target[k][1] + (fp[1]-target[k][1])*ease];
+      });
+      setPoints(cur);
+      if(p<1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  })();
+
+  /* ===== 技能条动画 ===== */
+  (function(){
+    var bars = document.querySelectorAll(".skill-bar i");
+    function run(){
+      bars.forEach(function(b){
+        var w = b.getAttribute("data-w");
+        b.style.width = w + "%";
+      });
+    }
+    setTimeout(run, 300);
+  })();
+
+  /* ===== 滚动显现 ===== */
+  (function(){
+    var items = document.querySelectorAll(".reveal");
+    if(!("IntersectionObserver" in window)){
+      items.forEach(function(el){ el.classList.add("visible"); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add("visible"); io.unobserve(e.target); }
+      });
+    }, {threshold:.08});
+    items.forEach(function(el){ io.observe(el); });
+  })();
+</script>
+</body>
+</html>
